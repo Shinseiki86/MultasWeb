@@ -23,9 +23,6 @@ Route::get('password/reset/{id}', 'Auth\PasswordController@showResetForm');
 Route::group(['prefix'=>'app', 'namespace'=>'App'], function() {
 	Route::resource('menu', 'MenuController', ['parameters'=>['menu'=>'MENU_ID']]);
 	Route::post('menu/reorder', 'MenuController@reorder')->name('app.menu.reorder');
-	Route::get('parameters', 'ParametersController@index')->name('app.parameters');
-	Route::get('upload', 'UploadDataController@index')->name('app.upload.index');
-	Route::post('upload', 'UploadDataController@upload')->name('app.upload');
 });
 
 Route::group(['middleware'=>'auth'], function() {
@@ -37,13 +34,18 @@ Route::group(['middleware'=>'auth'], function() {
 	Route::get('getArrModel', 'Controller@ajax');
 
 
-	Route::resource('propietarios', 'PropietarioController', ['parameters'=>['propietario'=>'PROP_ID']]);
-	Route::resource('vehiculos', 'VehiculoController', ['parameters'=>['vehiculo'=>'VEHI_ID']]);
-	Route::resource('multas', 'MultaController', ['parameters'=>['multa'=>'CIUD_ID']]);
-
-	Route::get('getMultas/{cedula}', 'MultaController@getMultasJson');
 });
 
+
+Route::group(['prefix'=>'core', 'middleware'=>'auth'], function() {
+	Route::resource('propietarios', 'PropietarioController', ['except'=>['show'], 'parameters'=>['propietario'=>'PROP_ID']]);
+	Route::resource('vehiculos', 'VehiculoController', ['except'=>['show'], 'parameters'=>['vehiculo'=>'VEHI_ID']]);
+	Route::resource('multas', 'MultaController', ['except'=>['show'], 'parameters'=>['multa'=>'MULT_ID']]);
+	Route::get('multas/getTable', 'MultaController@getData');
+});
+
+
+Route::get('getMultas/{cedula}', 'MultaController@getMultasJson');
 
 
 

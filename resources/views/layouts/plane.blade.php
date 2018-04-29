@@ -35,7 +35,7 @@
 		<script type="text/javascript">
 			$(function () {
 				//Si el formulario presenta error, realizará focus al primer elemento con error.
-				$('#{{current($errors->keys())}}').focus();
+				//$('#{{--current($errors->keys())--}}').focus();
 
 				//Activa los tooltip de Boostrap
 				tooltips = $('[data-tooltip="tooltip"]');

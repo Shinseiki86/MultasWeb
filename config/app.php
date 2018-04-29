@@ -149,7 +149,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        Mitul\Generator\GeneratorServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -163,8 +162,8 @@ return [
         Felixkiss\UniqueWithValidator\ServiceProvider::class,
 
         //Add by DiegoCortes
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
+        //Maatwebsite\Excel\ExcelServiceProvider::class,
+        //Barryvdh\DomPDF\ServiceProvider::class,
         //Chumper\Zipper\ZipperServiceProvider::class,
         //Styde\Html\HtmlServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,

@@ -9,7 +9,7 @@ use App\Models\Propietario;
 
 class PropietarioController extends Controller
 {
-	protected $route = 'multas.propietarios';
+	protected $route = 'core.propietarios';
 	protected $class = Propietario::class;
 
 	public function __construct()

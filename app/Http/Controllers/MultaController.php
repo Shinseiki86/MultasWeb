@@ -10,12 +10,14 @@ use App\Models\Vehiculo;
 
 class MultaController extends Controller
 {
-	protected $route = 'multas.multas';
+	protected $route = 'core.multas';
 	protected $class = Multa::class;
 
 	public function __construct()
 	{
-		parent::__construct();
+		//parent::__construct($false);
+		$this->middleware('auth')->except(['getMultasJson']);
+
 	}
 
 	/**
@@ -33,9 +35,9 @@ class MultaController extends Controller
 	 *
 	 * @return json
 	 */
-	public function getMultasJson($prop_cedula)
+	public function getMultasJson()
 	{
-		$model = Multa::join('VEHICULOS', 'VEHICULOS.VEHI_ID', '=', 'MULTAS.VEHI_ID')
+		return Multa::join('VEHICULOS', 'VEHICULOS.VEHI_ID', '=', 'MULTAS.VEHI_ID')
 						->join('PROPIETARIOS', 'PROPIETARIOS.PROP_ID', '=', 'MULTAS.PROP_ID')
 						->select([
 							//'MULTAS.PROP_ID',
@@ -51,14 +53,8 @@ class MultaController extends Controller
 							'MULT_VALOR as Valor',
 							'MULT_DESCRIPCION as Descripcion',
 						])
-                        ->where('PROP_CEDULA', '=', $prop_cedula)
-                        ->get();
-		return $model->toJson();
-		/*return Datatables::collection($model)
-			->addColumn('action', function($model){
-				return parent::buttonEdit($model).
-					parent::buttonDelete($model, 'MULT_ID');
-			})->make(true);*/
+						->where('PROP_CEDULA', '=', $prop_cedula)
+						->get()->toJson();
 	}
 
 	/**
@@ -71,16 +67,16 @@ class MultaController extends Controller
 		$model = Multa::join('VEHICULOS', 'VEHICULOS.VEHI_ID', '=', 'MULTAS.VEHI_ID')
 						->join('PROPIETARIOS', 'PROPIETARIOS.PROP_ID', '=', 'MULTAS.PROP_ID')
 						->select([
-							'PROP_CEDULA as Cédula',
-							'PROP_NOMBRE as Nombre',
-							'PROP_APELLIDO as Apellido',
-							'VEHI_PLACA as Placa',
-							'VEHI_MODELO as Modelo',
-							'VEHI_ANNO as Año',
-							'MULT_FECHA as Fecha',
-							'MULT_ESTADO as Estado',
-							'MULT_VALOR as Valor',
-							'MULT_DESCRIPCION as Descripción',
+							'PROP_CEDULA',
+							'PROP_NOMBRE',
+							'PROP_APELLIDO',
+							'VEHI_PLACA',
+							'VEHI_MODELO',
+							'VEHI_ANNO',
+							'MULT_FECHA',
+							'MULT_ESTADO',
+							'MULT_VALOR',
+							'MULT_DESCRIPCION',
 						])->get();
 
 		return Datatables::collection($model)
@@ -117,13 +113,13 @@ class MultaController extends Controller
 	/**
 	 * Muestra el formulario para editar un registro en particular.
 	 *
-	 * @param  int  $CIUD_ID
+	 * @param  int  $MULT_ID
 	 * @return Response
 	 */
-	public function edit($CIUD_ID)
+	public function edit($MULT_ID)
 	{
 		// Se obtiene el registro
-		$multa = Multa::findOrFail($CIUD_ID);
+		$multa = Multa::findOrFail($MULT_ID);
 
 		//Se crea un array con los vehiculos disponibles
 		$arrVehiculos = model_to_array(Vehiculo::class, 'VEHI_NOMBRE');
@@ -136,23 +132,23 @@ class MultaController extends Controller
 	/**
 	 * Actualiza un registro en la base de datos.
 	 *
-	 * @param  int  $CIUD_ID
+	 * @param  int  $MULT_ID
 	 * @return Response
 	 */
-	public function update($CIUD_ID)
+	public function update($MULT_ID)
 	{
-		parent::updateModel($CIUD_ID);
+		parent::updateModel($MULT_ID);
 	}
 
 	/**
 	 * Elimina un registro de la base de datos.
 	 *
-	 * @param  int  $CIUD_ID
+	 * @param  int  $MULT_ID
 	 * @return Response
 	 */
-	public function destroy($CIUD_ID)
+	public function destroy($MULT_ID)
 	{
-		parent::destroyModel($CIUD_ID);
+		parent::destroyModel($MULT_ID);
 	}
 
 }

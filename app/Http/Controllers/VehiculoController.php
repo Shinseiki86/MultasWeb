@@ -9,7 +9,7 @@ use App\Models\Vehiculo;
 
 class VehiculoController extends Controller
 {
-	protected $route = 'multas.vehiculos';
+	protected $route = 'core.vehiculos';
 	protected $class = Vehiculo::class;
 
 	public function __construct()
