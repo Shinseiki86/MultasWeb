@@ -33,24 +33,26 @@ class MultaController extends Controller
 	 *
 	 * @return json
 	 */
-	public function getMultasJson()
+	public function getMultasJson($prop_cedula)
 	{
 		$model = Multa::join('VEHICULOS', 'VEHICULOS.VEHI_ID', '=', 'MULTAS.VEHI_ID')
 						->join('PROPIETARIOS', 'PROPIETARIOS.PROP_ID', '=', 'MULTAS.PROP_ID')
 						->select([
 							//'MULTAS.PROP_ID',
-							'PROP_CEDULA as Cédula',
+							'PROP_CEDULA as Cedula',
 							'PROP_NOMBRE as Nombre',
 							'PROP_APELLIDO as Apellido',
 							//'MULTAS.VEHI_ID',
 							'VEHI_PLACA as Placa',
 							'VEHI_MODELO as Modelo',
-							'VEHI_ANNO as Año',
+							'VEHI_ANNO as Ano',
 							'MULT_FECHA as Fecha',
 							'MULT_ESTADO as Estado',
 							'MULT_VALOR as Valor',
-							'MULT_DESCRIPCION as Descripción',
-						])->get();
+							'MULT_DESCRIPCION as Descripcion',
+						])
+                        ->where('PROP_CEDULA', '=', $prop_cedula)
+                        ->get();
 		return $model->toJson();
 		/*return Datatables::collection($model)
 			->addColumn('action', function($model){
