@@ -35,7 +35,7 @@ class MultaController extends Controller
 	 *
 	 * @return json
 	 */
-	public function getMultasJson()
+	public function getMultasJson($cedula)
 	{
 		return Multa::join('VEHICULOS', 'VEHICULOS.VEHI_ID', '=', 'MULTAS.VEHI_ID')
 						->join('PROPIETARIOS', 'PROPIETARIOS.PROP_ID', '=', 'MULTAS.PROP_ID')
@@ -53,7 +53,7 @@ class MultaController extends Controller
 							'MULT_VALOR as Valor',
 							'MULT_DESCRIPCION as Descripcion',
 						])
-						->where('PROP_CEDULA', '=', $prop_cedula)
+						->where('PROP_CEDULA', '=', $cedula)
 						->get()->toJson();
 	}
 
