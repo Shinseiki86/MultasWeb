@@ -5,7 +5,7 @@
 <html lang="es" class="no-js">
 <!--<![endif]-->
 	<head>
-		<title>SGH @yield('title')</title>
+		<title>Multas @yield('title')</title>
 		{!! Html::meta( null, 'IE=edge', [ 'http-equiv'=>'X-UA-Compatible' ] ) !!}
 		{!! Html::meta( null, 'text/html; charset=utf-8', [ 'http-equiv'=>'Content-Type' ] ) !!}
 
@@ -50,7 +50,7 @@
 
 		<footer class="footer navbar-default navbar-fixed-bottom" style="margin-right: 10px">
 			<div class="text-right text-muted">
-				<small>SGH&copy; powered by <i>diheke</i></small>
+				<small>Multas&copy; powered by <i>diheke</i></small>
 			</div>
 		</footer>
 	</body>

@@ -2,7 +2,7 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
 
         <div class="col-xs-1">
-            <a class="navbar-brand" href="{{ url ('') }}" >SGH</a>
+            <a class="navbar-brand" href="{{ url ('') }}" >Multas</a>
             <!--menu toggle button -->
             <button id="menu-toggle" type="button" data-toggle="button" class="menu-toggler sidebar-toggler btn btn-link" style="margin-left: 0px;color: #333;">
                 <i class="fa fa-toggle-off fa-fw"></i>

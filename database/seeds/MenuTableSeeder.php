@@ -82,25 +82,25 @@ class MenuTableSeeder extends Seeder
 
 		
 		Menu::create([
-			'MENU_LABEL' => 'Países',
-			'MENU_URL' => 'cnfg-geograficos/paises',
+			'MENU_LABEL' => 'Propietarios',
+			'MENU_URL' => 'cnfg-geograficos/propietarios',
 			'MENU_ICON' => 'fa-circle',
             'MENU_ORDER' => $orderMenuLeft++,
-			'PERM_ID' => $this->getPermission('pais-index'),
+			'PERM_ID' => $this->getPermission('propietario-index'),
 		]);
 		Menu::create([
-			'MENU_LABEL' => 'Departamentos',
-			'MENU_URL' => 'cnfg-geograficos/departamentos',
+			'MENU_LABEL' => 'Vehiculos',
+			'MENU_URL' => 'cnfg-geograficos/vehiculos',
 			'MENU_ICON' => 'fa-circle',
 			'MENU_ORDER' => $orderItem++,
-			'PERM_ID' => $this->getPermission('departamento-index'),
+			'PERM_ID' => $this->getPermission('vehiculo-index'),
 		]);
 		Menu::create([
-			'MENU_LABEL' => 'Ciudades',
-			'MENU_URL' => 'cnfg-geograficos/ciudades',
+			'MENU_LABEL' => 'Multas',
+			'MENU_URL' => 'cnfg-geograficos/multas',
 			'MENU_ICON' => 'fa-circle-o',
 			'MENU_ORDER' => $orderItem++,
-			'PERM_ID' => $this->getPermission('ciudad-index'),
+			'PERM_ID' => $this->getPermission('multa-index'),
 		]);
 
         //TOP

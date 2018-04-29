@@ -36,19 +36,3 @@
 		});
 	</script>
 @endpush
-
-{{-- Ejemplo de como incluirlo
-	@include('select-dinamico', ['url'=>'buscaCiudad', 'selectPadre'=>'departamentos', 'selectHijo'=>'ciudades', 'idBusqueda'=>'CIUD_ID', 'nombreBusqueda'=>'CIUD_NOMBRE', 'prepend'=>'Seleccione una Ciudad'])
-
-public function llenaSelectPadre()
-{
-     $departamentos = Departamento::lists('DEPA_NOMBRE','DEPA_ID')->prepend('Seleccione')->toArray();
-    return view('select',compact('departamentos'));
-}
-
-public function buscaCiudad(Request $request)
-{ 
-    $data=Ciudad::select('CIUD_NOMBRE','CIUD_ID')->where('DEPA_ID',$request->DEPA_ID)->take(100)->get();
-    return response()->json($data);
-}
---}}

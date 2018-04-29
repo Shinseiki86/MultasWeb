@@ -57,9 +57,9 @@ use App\Models\Permission;
                 $this->createPermissions(Role::class, 'roles');
                 $this->createPermissions(Permission::class, 'permisos');
 
-                $this->createPermissions(Pais::class, 'países');
-                $this->createPermissions(Departamento::class, 'departamentos');
-                $this->createPermissions(Ciudad::class, 'ciudades');
+                $this->createPermissions(Propietario::class, 'países');
+                $this->createPermissions(Vehiculo::class, 'vehiculos');
+                $this->createPermissions(Multa::class, 'multas');
 
                 
 

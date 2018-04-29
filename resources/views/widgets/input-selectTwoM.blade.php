@@ -19,6 +19,6 @@
 @endpush
 
 {{-- ejemplo de llamado
-  @include('widgets.forms.input-selectTwoM',['columns'=>[['name'=>'PROS_ID','placeholder'=>'Seleccione un Departamento','allowClear'=>true],['name'=>'EMPL_ID','placeholder'=>'Seleccione un Departamento','allowClear'=>true],['name'=>'TEMP_ID','placeholder'=>'Seleccione un Departamento','allowClear'=>true]]])
+  @include('widgets.forms.input-selectTwoM',['columns'=>[['name'=>'PROS_ID','placeholder'=>'Seleccione un Vehiculo','allowClear'=>true],['name'=>'EMPL_ID','placeholder'=>'Seleccione un Vehiculo','allowClear'=>true],['name'=>'TEMP_ID','placeholder'=>'Seleccione un Vehiculo','allowClear'=>true]]])
   --}}
   
