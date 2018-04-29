@@ -1,0 +1,27 @@
+[
+{
+"field":"COAU_CODIGO:string:comment,Codigo del concepto de la Ausencia",
+"type":"text",
+"validations":"unique:CONCEPTOAUSENCIAS|required"
+},
+{
+"field":"COAU_DESCRIPCION:string:comment,Descripcion del Concepto de la Ausencia",
+"type":"text",
+"validations":"unique:CONCEPTOAUSENCIAS|required"
+},
+{
+"field":"COAU_OBSERVACIONES:string:nullable:comment,Observaciones Relacionadas con el Concepto de la Ausencia",
+"type":"text",
+"validations":""
+},
+{
+"field":"TIAU_ID:integer:unsignedInteger,TIAU_ID:foreign,TIAU_ID:references,TIAU_ID:on,TIPOAUSENTISMOS:onDelete,cascade:onUpdate,cascade:comment,Id del Tipo de Ausentismo",
+"type":"number",
+"validations":"required"
+},
+{
+"field":"TIEN_ID:integer:unsignedInteger,TIEN_ID:foreign,TIEN_ID:references,TIEN_ID:on,TIPOENTIDADES:onDelete,cascade:onUpdate,cascade:comment,Id del Tipo de Entidad",
+"type":"number",
+"validations":"required"
+}
+]

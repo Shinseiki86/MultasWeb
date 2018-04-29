@@ -1,0 +1,37 @@
+[
+{
+"field":"AUSE_ID:integer:unsignedInteger,AUSE_ID:foreign,AUSE_ID:references,AUSE_ID:on,AUSENTISMOS:onDelete,cascade:onUpdate,cascade:comment,Id del Ausentismo",
+"type":"number",
+"validations":"required"
+},
+{
+"field":"DIAG_ID:integer:unsignedInteger,DIAG_ID:foreign,DIAG_ID:references,DIAG_ID:on,DIAGNOSTICOS:onDelete,cascade:onUpdate,cascade:nullable:comment,Id del Dianostico",
+"type":"number",
+"validations":""
+},
+{
+"field":"COAU_ID:integer:unsignedInteger,COAU_ID:foreign,COAU_ID:references,COAU_ID:on,CONCEPTOAUSENCIAS:onDelete,cascade:onUpdate,cascade:comment,Ide del Consecpto Ausentismo",
+"type":"number",
+"validations":"required"
+},
+{
+"field":"PROR_FECHAINICIO:datetime:comment,Fecha de Inicio de la Prorroga",
+"type":"date",
+"validations":"date|required"
+},
+{
+"field":"PROR_FECHAFINAL:datetime:comment,Fecha Final de la Prorroga",
+"type":"date",
+"validations":"date|required"
+},
+{
+"field":"PROR_DIAS:integer:unsigned",
+"type":"number",
+"validations":"required|numeric"
+},
+{
+"field":"PROR_OBSERVACIONES:string:nullable:comment,Observaciones de la Prorroga",
+"type":"textarea",
+"validations":""
+}
+]

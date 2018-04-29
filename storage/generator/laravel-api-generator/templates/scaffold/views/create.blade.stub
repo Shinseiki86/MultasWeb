@@ -1,0 +1,18 @@
+@extends('layouts.menu')
+
+@section('page_heading', 'Nueva ')
+
+@section('section')
+{{-- <div class="col-md-6 col-md-offset-4"> --}}
+	{{ Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.store', 'class' => 'form-horizontal']) }}
+
+		<!-- Elementos del formulario -->
+		@include('$MODEL_NAME_PLURAL_CAMEL$.fields')
+
+		<!-- Botones -->
+		@include('widgets.forms.buttons', ['url' => '$MODEL_NAME_PLURAL_CAMEL$'])
+
+	{{ Form::close() }}
+{{-- </div> --}}
+@endsection
+

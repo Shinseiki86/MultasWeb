@@ -1,0 +1,43 @@
+@extends('layouts.menu')
+@section('title', '/ Ciudades')
+
+@section('page_heading')
+    @include('$MODEL_NAME_PLURAL_CAMEL$.modal')
+    <div class="row">
+        <div id="titulo" class="col-xs-8 col-md-6 col-lg-6">
+            $MODEL_NAME_PLURAL$
+        </div>
+        <div id="btns-top" class="col-xs-4 col-md-6 col-lg-6 text-right">
+        <button class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Editar</button>
+            <a class='btn btn-primary' role='button' href="{{ route('$MODEL_NAME_PLURAL_CAMEL$.create') }}" data-tooltip="tooltip" title="Crear Nuevo">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+@endsection
+
+@section('section')
+
+    <table class="table table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th class="col-md-1">Titulo1</th>
+                <th class="col-md-4">Titulo2</th>
+                <th class="col-md-4">Titulo3</th>
+                <th class="hidden-xs col-md-1">Titulo4</th>
+                <th class="col-md-1 all">Acciones</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    @include('widgets/modal-delete')
+    @include('datatable-ajax', ['urlAjax'=>'get$MODEL_NAME$', 'columns'=>[
+        '$FIELD_NAME$',
+        'Titulo2',
+        'Titulo3',
+        'Titulo4',
+    ]]) 
+@endsection
+
+

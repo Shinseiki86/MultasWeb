@@ -1,0 +1,57 @@
+[
+{
+"field":"DIAG_ID:integer:unsignedInteger,DIAG_ID:foreign,DIAG_ID:references,DIAG_ID:on,DIAGNOSTICOS:onDelete,cascade:onUpdate,cascade:nullable:comment,Id de la tabla Diagnostico",
+"type":"number",
+"validations":""
+},
+{
+"field":"COAU_ID:integer:unsignedInteger,COAU_ID:foreign,COAU_ID:references,COAU_ID:on,CONCEPTOAUSENTISMOS:onDelete,cascade:onUpdate,cascade:comment,Id de la tabla Concepto Ausentismo",
+"type":"number",
+"validations":"required"
+},
+{
+"field":"CONT_ID:integer:unsignedInteger,CONT_ID:foreign,CONT_ID:references,CONT_ID:on,CONTRATOS:onDelete,cascade:onUpdate,cascade:comment,Id d ela tabla Contrato",
+"type":"number",
+"validations":"required"
+},
+{
+"field":"AUSE_FECHAINICIO:datetime:comment,Fecha de Inicio del Ausentismo",
+"type":"date",
+"validations":"required|date"
+},
+{
+"field":"AUSE_FECHAFINAL:datetime:comment,Fecha Final del Ausentismo",
+"type":"date",
+"validations":"date|required"
+},
+{
+"field":"AUSE_DIAS:integer:unsigned",
+"type":"number",
+"validations":"required"
+},
+{
+"field":"AUSE_FECHAACCIDENTE:date:nullable:comment,Fecha del Accidente de Trabajo",
+"type":"date",
+"validations":"date"
+},
+{
+"field":"ENTI_ID:integer:unsignedInteger,ENTI_ID:foreign,ENTI_ID:references,ENTI_ID:on,ENTIDADES:onDelete,cascade:onUpdate,cascade:comment,Id de la entidad Responsable del Ausentismo",
+"type":"number",
+"validations":"required"
+},
+{
+"field":"AUSE_IBC:integer:nullable:comment,Ingreso Base de Cotizacion del Prospecto",
+"type":"number",
+"validations":""
+},
+{
+"field":"AUSE_VALOR:integer:nullable:comment,Valor Total del Ausentismo",
+"type":"number",
+"validations":""
+},
+{
+"field":"AUSE_OBSERVACIONES:string:nullable:comment,Observaciones del Ausentismo",
+"type":"text",
+"validations":""
+}
+]
