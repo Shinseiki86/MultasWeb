@@ -31,9 +31,9 @@ class Multa extends ModelWithSoftDeletes
 			'MULT_FECHA'  => ['required','date'],
 			'PROP_ID'     => ['required','numeric'],
 			'VEHI_ID'     => ['required','numeric'],
-			'MULT_ESTADO' => ['required','boolean'],
+			'MULT_ESTADO' => ['required','string'],
 			'MULT_VALOR'  => ['required','numeric'],
-			'MULT_DESCRIPCION'=> ['required','max:300'],
+			'MULT_DESCRIPCION'=> ['max:300'],
 		];
 		return $rules;
 	}
@@ -42,5 +42,10 @@ class Multa extends ModelWithSoftDeletes
 	{
 		$foreingKey = 'VEHI_ID';
 		return $this->belongsTo(Vehiculo::class, $foreingKey);
+	}
+	public function propietario()
+	{
+		$foreingKey = 'VEHI_ID';
+		return $this->belongsTo(Propietario::class, $foreingKey);
 	}
 }

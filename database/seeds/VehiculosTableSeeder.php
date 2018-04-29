@@ -17,6 +17,7 @@ class VehiculosTableSeeder extends Seeder
             'PROP_ID'    	=> 1,
             'VEHI_MODELO'   => 'FORD FIESTA',
             'VEHI_ANNO'     => 2000,
+            'VEHI_CREADOPOR' => 'PRUEBA',
         ]);
 
 		Vehiculo::create([
@@ -24,6 +25,7 @@ class VehiculosTableSeeder extends Seeder
             'PROP_ID'    	=> 1,
             'VEHI_MODELO'   => 'AUDI',
             'VEHI_ANNO'     => 2001,
+            'VEHI_CREADOPOR' => 'PRUEBA',
         ]);
 
 		Vehiculo::create([
@@ -31,6 +33,7 @@ class VehiculosTableSeeder extends Seeder
             'PROP_ID'    	=> 2,
             'VEHI_MODELO'   => 'RENAULT 4',
             'VEHI_ANNO'     => 1986,
+            'VEHI_CREADOPOR' => 'PRUEBA',
         ]);
 
 	}

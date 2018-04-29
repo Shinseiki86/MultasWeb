@@ -3,7 +3,7 @@
 @section('page_heading', 'Nuevo Propietario')
 
 @section('section')
-{{ Form::open(['route' => 'propietarios.store', 'class' => 'form-horizontal']) }}
+{{ Form::open(['route' => 'core.propietarios.store', 'class' => 'form-horizontal']) }}
 
 	<!-- Elementos del formulario -->
 	@rinclude('form-inputs')

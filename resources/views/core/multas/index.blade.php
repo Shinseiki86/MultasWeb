@@ -33,20 +33,44 @@
 				<th class="col-xs-1 all notFilter"></th>
 			</tr>
 		</thead>
-		<tbody></tbody>
+		<tbody>
+			@foreach($multas as $multa)
+			<tr>
+				<td>{{ $multa -> PROP_CEDULA }}</td>
+				<td>{{ $multa -> PROP_NOMBRE }}</td>
+				<td>{{ $multa -> PROP_APELLIDO }}</td>
+
+				<td>{{ $multa -> VEHI_PLACA }}</td>
+				<td>{{ $multa -> VEHI_MODELO }}</td>
+				<td>{{ $multa -> VEHI_ANNO }}</td>
+				<td>{{ $multa -> MULT_FECHA }}</td>
+				<td>{{ $multa -> MULT_ESTADO }}</td>
+				<td>{{ $multa -> MULT_VALOR }}</td>
+				<td>{{ $multa -> MULT_DESCRIPCION }}</td>
+				<td>
+					<!-- Botón Editar (edit) -->
+					<a class="btn btn-small btn-info btn-xs" href="{{ route('core.multas.edit', [ 'MULT_ID' => $multa->MULT_ID ] ) }}" data-tooltip="tooltip" title="Editar">
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					</a>
+
+					<!-- carga botón de borrar -->
+					{{ Form::button('<i class="fa fa-trash" aria-hidden="true"></i>',[
+						'class'=>'btn btn-xs btn-danger btn-delete',
+						'data-toggle'=>'modal',
+						'data-id'=> $multa->MULT_ID,
+						'data-modelo'=> str_upperspace(class_basename($multa)),
+						'data-descripcion'=> $multa->PROP_CEDULA.' '.$multa->VEHI_PLACA,
+						'data-action'=>'multas/'. $multa->MULT_ID,
+						'data-target'=>'#pregModalDelete',
+						'data-tooltip'=>'tooltip',
+						'title'=>'Borrar',
+					])}}
+				</td>
+			</tr>
+			@endforeach
+		</tbody>
 	</table>
 
 	@include('widgets/modal-delete')
-	@include('widgets.datatable.datatable-ajax', ['urlAjax'=>'multas/getTable', 'columns'=>[
-		'PROP_CEDULA',
-		'PROP_NOMBRE',
-		'PROP_APELLIDO',
-		'VEHI_PLACA',
-		'VEHI_MODELO',
-		'VEHI_ANNO',
-		'MULT_FECHA',
-		'MULT_ESTADO',
-		'MULT_VALOR',
-		'MULT_DESCRIPCION',
-	]])	
+	@include('widgets.datatable.datatable-export')	
 @endsection

@@ -16,11 +16,13 @@ class PropietariosTableSeeder extends Seeder
             'PROP_CEDULA'    => 123456789,
             'PROP_NOMBRE'    => 'PEPE',
             'PROP_APELLIDO'  => 'PEREZ',
+            'PROP_CREADOPOR' => 'PRUEBA',
         ]);
         Propietario::create([
             'PROP_CEDULA'    => 987654321,
             'PROP_NOMBRE'    => 'MONICA',
             'PROP_APELLIDO'  => 'GALINDO',
+            'PROP_CREADOPOR' => 'PRUEBA',
         ]);
     }
 }

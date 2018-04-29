@@ -32,6 +32,11 @@ class Propietario extends ModelWithSoftDeletes
 		return $rules;
 	}
 	
+	public function multas()
+	{
+		$foreingKey = 'PROP_ID';
+		return $this->hasMany(Multa::class, $foreingKey);
+	}
 	public function vehiculos()
 	{
 		$foreingKey = 'PROP_ID';

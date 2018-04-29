@@ -27,7 +27,22 @@ class MultaController extends Controller
 	 */
 	public function index()
 	{
-		return view($this->route.'.index');
+		$multas = Multa::join('VEHICULOS', 'VEHICULOS.VEHI_ID', '=', 'MULTAS.VEHI_ID')
+						->join('PROPIETARIOS', 'PROPIETARIOS.PROP_ID', '=', 'MULTAS.PROP_ID')
+						->select([
+							'MULT_ID',
+							'PROP_CEDULA',
+							'PROP_NOMBRE',
+							'PROP_APELLIDO',
+							'VEHI_PLACA',
+							'VEHI_MODELO',
+							'VEHI_ANNO',
+							'MULT_FECHA',
+							'MULT_ESTADO',
+							'MULT_VALOR',
+							'MULT_DESCRIPCION',
+						])->get();
+		return view($this->route.'.index', compact('multas'));
 	}
 
 	/**
@@ -57,34 +72,6 @@ class MultaController extends Controller
 						->get()->toJson();
 	}
 
-	/**
-	 * Retorna json para Datatable.
-	 *
-	 * @return json
-	 */
-	public function getData()
-	{
-		$model = Multa::join('VEHICULOS', 'VEHICULOS.VEHI_ID', '=', 'MULTAS.VEHI_ID')
-						->join('PROPIETARIOS', 'PROPIETARIOS.PROP_ID', '=', 'MULTAS.PROP_ID')
-						->select([
-							'PROP_CEDULA',
-							'PROP_NOMBRE',
-							'PROP_APELLIDO',
-							'VEHI_PLACA',
-							'VEHI_MODELO',
-							'VEHI_ANNO',
-							'MULT_FECHA',
-							'MULT_ESTADO',
-							'MULT_VALOR',
-							'MULT_DESCRIPCION',
-						])->get();
-
-		return Datatables::collection($model)
-			->addColumn('action', function($model){
-				return parent::buttonEdit($model).
-					parent::buttonDelete($model, 'MULT_ID');
-			})->make(true);
-	}
 
 	/**
 	 * Muestra el formulario para crear un nuevo registro.
@@ -93,10 +80,7 @@ class MultaController extends Controller
 	 */
 	public function create()
 	{
-		//Se crea un array con los vehiculos disponibles
-		$arrVehiculos = model_to_array(Vehiculo::class, 'VEHI_PLACA');
-
-		return view($this->route.'.create', compact('arrVehiculos'));
+		return view($this->route.'.create', $this->getArraysSelect());
 	}
 
 	/**
@@ -118,14 +102,8 @@ class MultaController extends Controller
 	 */
 	public function edit($MULT_ID)
 	{
-		// Se obtiene el registro
 		$multa = Multa::findOrFail($MULT_ID);
-
-		//Se crea un array con los vehiculos disponibles
-		$arrVehiculos = model_to_array(Vehiculo::class, 'VEHI_NOMBRE');
-
-		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('multa', 'arrVehiculos'));
+		return view($this->route.'.edit', $this->getArraysSelect()+compact('multa'));
 	}
 
 
@@ -149,6 +127,21 @@ class MultaController extends Controller
 	public function destroy($MULT_ID)
 	{
 		parent::destroyModel($MULT_ID);
+	}
+
+	private function getArraysSelect()
+	{
+		//Se crea un array con los vehiculos disponibles
+		$arrVehiculos = model_to_array(Vehiculo::class, 'VEHI_PLACA');
+
+		$PROP_NOMBRECOMPLETO = expression_concat([
+			'PROP_CEDULA',
+			'PROP_NOMBRE',
+			'PROP_APELLIDO',
+		], 'PROP_NOMBRECOMPLETO');
+		$arrPropietario = model_to_array(Propietario::class, $PROP_NOMBRECOMPLETO);
+
+		return compact('arrVehiculos', 'arrPropietario');
 	}
 
 }

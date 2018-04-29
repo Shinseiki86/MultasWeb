@@ -24,8 +24,8 @@ class CreateMultasTable extends Migration
             $table->date('MULT_FECHA');
             $table->unsignedInteger('VEHI_ID')->comment('Llave foranea con VEHICULOS');
             $table->unsignedInteger('PROP_ID')->comment('Llave foranea con PROPIETARIOS');
-
-            $table->boolean('MULT_ESTADO');
+            
+            $table->enum('MULT_ESTADO', ['PENDIENTE', 'PAGADA']);
             $table->unsignedBigInteger('MULT_VALOR');
             $table->string('MULT_DESCRIPCION', 300);
             

@@ -25,30 +25,21 @@ class VehiculoController extends Controller
 	 */
 	public function index()
 	{
-		return view($this->route.'.index');
-	}
+		$PROP_NOMBRECOMPLETO = expression_concat([
+			'PROP_NOMBRE',
+			'PROP_APELLIDO',
+		], 'PROP_NOMBRECOMPLETO');
 
-
-	/**
-	 * Retorna json para Datatable.
-	 *
-	 * @return json
-	 */
-	public function getData()
-	{
-		//$model = Vehiculo::with('propietario','multas')->get();
-		$model = Vehiculo::join('PROPIETARIOS', 'PROPIETARIOS.PROP_ID', '=', 'VEHICULOS.PROP_ID')
-						->select(['VEHI_ID','VEHI_CODIGO','VEHI_NOMBRE','PROP_NOMBRE','VEHI_CREADOPOR'])
-						->get();
-
-		return Datatables::collection($model)
-			->addColumn('MULTAS_COUNT', function($model){
-				return $model->multas->count();
-			})
-			->addColumn('action', function($model){
-				return parent::buttonEdit($model).
-					parent::buttonDelete($model, 'VEHI_NOMBRE');
-			})->make(true);
+		$vehiculos = Vehiculo::join('PROPIETARIOS', 'PROPIETARIOS.PROP_ID', '=', 'VEHICULOS.PROP_ID')
+						->select([
+							'VEHI_ID',
+							'VEHI_PLACA',
+							'VEHI_MODELO',
+							'VEHI_ANNO',
+							'PROP_CEDULA',
+							$PROP_NOMBRECOMPLETO,
+						])->get();
+		return view($this->route.'.index', compact('vehiculos'));
 	}
 
 
@@ -59,10 +50,7 @@ class VehiculoController extends Controller
 	 */
 	public function create()
 	{
-		//Se crea un array con los países disponibles
-		$arrPropietarios = model_to_array(Propietario::class, 'PROP_NOMBRE');
-
-		return view($this->route.'.create', compact('arrPropietarios'));
+		return view($this->route.'.create', $this->getArraysSelect());
 	}
 
 	/**
@@ -84,14 +72,8 @@ class VehiculoController extends Controller
 	 */
 	public function edit($VEHI_ID)
 	{
-		// Se obtiene el registro
 		$vehiculo = Vehiculo::findOrFail($VEHI_ID);
-
-		//Se crea un array con los países disponibles
-		$arrPropietarios = model_to_array(Propietario::class, 'PROP_NOMBRE');
-
-		// Muestra el formulario de edición y pasa el registro a editar
-		return view($this->route.'.edit', compact('vehiculo', 'arrPropietarios'));
+		return view($this->route.'.edit', $this->getArraysSelect()+compact('vehiculo'));
 	}
 
 
@@ -115,6 +97,19 @@ class VehiculoController extends Controller
 	public function destroy($VEHI_ID)
 	{
 		parent::destroyModel($VEHI_ID);
+	}
+
+	private function getArraysSelect()
+	{
+
+		$PROP_NOMBRECOMPLETO = expression_concat([
+			'PROP_CEDULA',
+			'PROP_NOMBRE',
+			'PROP_APELLIDO',
+		], 'PROP_NOMBRECOMPLETO');
+		$arrPropietarios = model_to_array(Propietario::class, $PROP_NOMBRECOMPLETO);
+
+		return compact('arrPropietarios');
 	}
 
 

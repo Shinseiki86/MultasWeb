@@ -24,29 +24,16 @@ class PropietarioController extends Controller
 	 */
 	public function index()
 	{
-		return view($this->route.'.index');
+		$propietarios = Propietario::select([
+					'PROP_ID',
+					'PROP_CEDULA',
+					'PROP_NOMBRE',
+					'PROP_APELLIDO',
+				])->get();
+
+		return view($this->route.'.index', compact('propietarios'));
 	}
 
-	/**
-	 * Retorna json para Datatable.
-	 *
-	 * @return json
-	 */
-	public function getData()
-	{
-		//$model = Propietario::with('vehiculos')->get();
-		$model = Propietario::select(['PROP_ID','PROP_CODIGO','PROP_NOMBRE','PROP_CREADOPOR'])
-						->get();
-
-		return Datatables::collection($model)
-			->addColumn('VEHICULOS_COUNT', function($model){
-				return $model->vehiculos->count();
-			})
-			->addColumn('action', function($model){
-				return parent::buttonEdit($model).
-					parent::buttonDelete($model, 'PROP_NOMBRE');
-			})->make(true);
-	}
 
 	/**
 	 * Muestra el formulario para crear un nuevo registro.
