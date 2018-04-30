@@ -63,10 +63,7 @@ class PropietarioController extends Controller
 	 */
 	public function edit($PROP_ID)
 	{
-		// Se obtiene el registro
 		$propietario = Propietario::findOrFail($PROP_ID);
-
-		// Muestra el formulario de edición y pasa el registro a editar
 		return view($this->route.'.edit', compact('propietario'));
 	}
 
@@ -92,6 +89,13 @@ class PropietarioController extends Controller
 		parent::destroyModel($PROP_ID);
 	}
 
+	private function getArraysSelect()
+	{
+		//Se crea un array con los vehiculos disponibles
+		//$arrVehiculos = model_to_array(Vehiculo::class, 'VEHI_PLACA');
+
+		//return compact('arrVehiculos');
+	}
 
 }
 

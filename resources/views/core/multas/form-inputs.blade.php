@@ -18,6 +18,6 @@
 	</div>
 
 	<!-- Botones -->
-	@include('widgets.forms.buttons', ['url' => 'cnfg-geograficos/multas'])
+	@include('widgets.forms.buttons', ['url' => 'core/multas'])
 
 </div>

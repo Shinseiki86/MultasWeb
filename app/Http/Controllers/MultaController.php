@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Yajra\Datatables\Facades\Datatables;
+
+use LaravelFCM\Message\Topics;
+use LaravelFCM\Message\OptionsBuilder;
+use LaravelFCM\Message\PayloadDataBuilder;
+use LaravelFCM\Message\PayloadNotificationBuilder;
+use FCM;
 
 use App\Models\Multa;
 use App\Models\Vehiculo;
@@ -146,3 +151,29 @@ class MultaController extends Controller
 
 }
 
+/*
+		$optionBuilder = new OptionsBuilder();
+		$optionBuilder->setTimeToLive(60*20);
+
+		$notificationBuilder = new PayloadNotificationBuilder('Nueva multa ACB123');
+		$notificationBuilder->setBody('La placa ABC123 tiene una nueva multa por $xxxx')
+						    ->setSound('default');
+
+		$dataBuilder = new PayloadDataBuilder();
+		$dataBuilder->addData(['a_data' => 'my_data']);
+
+		$option = $optionBuilder->build();
+		$notification = $notificationBuilder->build();
+		$data = $dataBuilder->build();
+
+		//$token = "AAAAwFWAWRg:APA91bFWj__Miw_gnjlDD2FW6d31uNRJnvZVqrtlsCJyHF6NWkCeAk7Bi1BRF8VT6DKYqIb8Fld3-FM6ES0TIMkVaOvc5zRnnhTXS-RPE8Pvcp6MMPMKuCW1rM2-M_IpM8gSJAf2Q77B";
+		$token = "AAAAwFWAWRg:APA91bGB0VTcd1wQZixvz7mIVROFny1CH5yg7udxWI9tlq0j5grzb_-Ve0wV35oIH3vy38_Ehfi57M1c_ouBtxyHTBDCl0M7o9IizfWPf-XEUf-BjZUblXgi45Jyohop7ayY33pUGN8I";
+
+		$downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
+		dump($downstreamResponse);
+
+		$topic = new Topics();
+		$topic->topic('multas');
+		$topicResponse = FCM::sendToTopic($topic, null, $notification, null);
+		dd($topicResponse);
+*/

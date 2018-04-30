@@ -1,3 +1,65 @@
+{{--@push('scripts')
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-messaging.js"></script>
+	<script>
+		var config = {
+			apiKey: "AIzaSyA1J6O7ehOYvjpysQjivrHeczw_xw_3liM",
+			authDomain: "appmultas-38b0c.firebaseapp.com",
+			databaseURL: "https://appmultas-38b0c.firebaseio.com",
+			projectId: "appmultas-38b0c",
+			storageBucket: "appmultas-38b0c.appspot.com",
+			messagingSenderId: "826068195608"
+		};
+		firebase.initializeApp(config);
+
+		const messaging = firebase.messaging();
+
+		messaging.requestPermission()
+		.then(function() {
+		  console.log('Notification permission granted.');
+		  return messaging.getToken();
+		})
+		.then(function(token) {
+		  console.log(token); // Display user token
+		})
+		.catch(function(err) { // Happen if user deney permission
+		  console.log('Unable to get permission to notify.', err);
+		});
+
+		messaging.onMessage(function(payload){
+			console.log('onMessage',payload);
+		})
+
+	</script>
+@endpush
+
+@php
+	// Server key from Firebase Console
+	define( 'API_ACCESS_KEY', 'AIzaSyA1J6O7ehOYvjpysQjivrHeczw_xw_3liM' );
+
+	$data = array("to" => "AIzaSyA1J6O7ehOYvjpysQjivrHeczw_xw_3liM",
+	              "notification" => array( "title" => "Shareurcodes.com", "body" => "A Code Sharing Blog!","icon" => "icon.png", "click_action" => "http://shareurcodes.com"));                                                                    
+	$data_string = json_encode($data); 
+
+	//echo "The Json Data : ".$data_string; 
+
+	$headers = array(
+			'Authorization: key=' . API_ACCESS_KEY, 
+			'Content-Type: application/json'
+		);                                                                                 
+	                                                                                                                     
+	$ch = curl_init();  
+
+	curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );                                                                  
+	curl_setopt( $ch,CURLOPT_POST, true );  
+	curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+	curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+	curl_setopt( $ch,CURLOPT_POSTFIELDS, $data_string);                                                                  
+	                                                                                                                     
+	$result = curl_exec($ch);
+@endphp
+--}}
+
 @extends('layouts.menu')
 @section('title', '/ Multas')
 

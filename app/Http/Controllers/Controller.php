@@ -138,12 +138,12 @@ class Controller extends BaseController
 	 */
 	protected function getRequest()
 	{
-		$exceptions = (isset($this->route) && array_has([
+		$exceptions = (isset($this->route) && in_array($this->route, [
 			'app.menu',
 			'auth.roles',
 			'auth.permisos',
-		], $this->route));
-
+		]));
+		
 		$data = request()->all();
 		foreach ($data as $input => $value) {
 			if($value=='')

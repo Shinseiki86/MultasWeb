@@ -20,6 +20,7 @@ class VehiculosTableSeeder extends Seeder
             'VEHI_CREADOPOR' => 'PRUEBA',
         ]);
 
+
 		Vehiculo::create([
             'VEHI_PLACA'    => 'ABC456',
             'PROP_ID'    	=> 1,

@@ -36,7 +36,7 @@ class Vehiculo extends ModelWithSoftDeletes
 
 	public function multas()
 	{
-		$foreingKey = 'VEHI_ID';
+		$foreingKey = 'MULT_ID';
 		return $this->hasMany(Multa::class, $foreingKey);
 	}
 
