@@ -19,6 +19,7 @@ Route::group(['prefix'=>'auth', 'namespace'=>'Auth'], function() {
 });
 Route::get('password/email/{id}', 'Auth\PasswordController@sendEmail');
 Route::get('password/reset/{id}', 'Auth\PasswordController@showResetForm');
+Route::get('login/webservice', 'Auth\AuthController@loginWebservice');
 
 Route::group(['prefix'=>'app', 'namespace'=>'App'], function() {
 	Route::resource('menu', 'MenuController', ['parameters'=>['menu'=>'MENU_ID']]);
@@ -50,6 +51,5 @@ Route::group(['prefix'=>'core', 'middleware'=>'auth'], function() {
 
 
 Route::get('getMultas/{cedula}', 'MultaController@getMultasJson');
-
 
 

@@ -13,5 +13,7 @@
 @endsection
 
 @section('section')
-
+	<div class="text-center">
+	    {!! QrCode::size(400)->generate(Request::url()) !!}
+	</div>
 @endsection

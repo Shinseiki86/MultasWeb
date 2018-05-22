@@ -14,8 +14,6 @@ use App\Models\User;
 use App\Models\Rol;
 use App\Models\Menu;
 
-use App\Models\Empleador;
-
 class AuthController extends Controller
 {
 	protected $username = 'username';
@@ -107,17 +105,8 @@ class AuthController extends Controller
 		//Se crea un array con los Role disponibles
 		$arrRoles = model_to_array(Role::class, 'display_name');
 
-		//Se crea un array con los Empleadores disponibles
-		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_NOMBRECOMERCIAL');
-
-		//Se crea un array con las Gerencias disponibles
-		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
-
-		//Se crea un array con las Temporales disponibles
-		$arrTemporales = model_to_array(Temporal::class, 'TEMP_NOMBRECOMERCIAL');
-
 		// Muestra el formulario de creación y los array para los 'select'
-		return view('auth.register', compact('arrRoles','arrEmpleadores','arrGerencias','arrTemporales'));
+		return view('auth.register', compact('arrRoles'));
 	}
 
 	/**
@@ -202,20 +191,8 @@ class AuthController extends Controller
 		$arrRoles = model_to_array(Role::class, 'display_name');
 		$roles_ids = $usuario->roles->pluck('id')->toJson();
 
-		//Se crea un array con los Empleadores disponibles
-		$arrEmpleadores = model_to_array(Empleador::class, 'EMPL_NOMBRECOMERCIAL');
-		$EMPL_ids = $usuario->empleadores->pluck('EMPL_ID')->toJson();
-
-		//Se crea un array con los Empleadores disponibles
-		$arrGerencias = model_to_array(Gerencia::class, 'GERE_DESCRIPCION');
-		$GERE_ids = $usuario->gerencias->pluck('GERE_ID')->toJson();
-
-		//Se crea un array con las Temporales disponibles
-		$arrTemporales = model_to_array(Temporal::class, 'TEMP_NOMBRECOMERCIAL');
-		$TEMP_ids = $usuario->temporales->pluck('TEMP_ID')->toJson();
-
 		// Muestra el formulario de edición y pasa el registro a editar
-		return view('auth/edit', compact('usuario','arrRoles','roles_ids','arrEmpleadores','arrGerencias','arrTemporales','EMPL_ids','GERE_ids','TEMP_ids'));
+		return view('auth/edit', compact('usuario','arrRoles','roles_ids'));
 	}
 
 	/**
@@ -328,6 +305,25 @@ class AuthController extends Controller
         \Auth::guard($this->getGuard())->logout();
 
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @return json
+     */
+    public function loginWebservice()
+    {
+		$username = Input::get('cedula');
+		$pass     = Input::get('pass');
+
+		$user = User::where($username)
+
+		return response()->json([
+			'nombre' => 'OK',
+			'source' => $source,
+			'destination' => $destination,
+		]);
     }
 
 }
